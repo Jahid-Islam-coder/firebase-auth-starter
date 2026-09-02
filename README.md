@@ -48,12 +48,21 @@ The goal was to keep the project simple while still following a clean structure 
 
 ---
 
-## Tech Stack
+## Tech Stack & Tools
 
-* Flutter
-* Dart
-* Firebase Authentication
-* Flutter Test
+### Framework & Language
+- Flutter
+- Dart
+
+### Authentication
+- Firebase Authentication
+
+### Local Storage
+- Shared Preferences
+
+### Testing
+- Flutter Test
+- Mocktail
 
 ---
 
@@ -85,17 +94,25 @@ This keeps authentication navigation separate from the individual login and sign
 
 ```text
 lib/
+├── models/
+│   └── user_model.dart
+│
 ├── screens/
-│   └── auth/
-│       ├── login/
-│       │   └── login_screen.dart
-│       ├── signup/
-│       │   └── signup_screen.dart
-│       ├── forgot_password_screen.dart
-│       └── verify_email_screen.dart
+│   ├── auth/
+│   │   ├── auth_wrapper.dart
+│   │   ├── forgot_password_screen.dart
+│   │   ├── login_screen.dart
+│   │   ├── register_screen.dart
+│   │   ├── verify_email_screen.dart
+│   │   └── welcome_screen_animation.dart
+│   │
+│   └── home/
+│       └── home_screen.dart
 │
 ├── services/
-│   └── auth_service.dart
+│   ├── add_user_info.dart
+│   ├── auth_service.dart
+│   └── welcome_preferences.dart
 │
 ├── utils/
 │   └── validators.dart
@@ -104,7 +121,7 @@ lib/
 │   ├── auth_button.dart
 │   └── auth_text_field.dart
 │
-├── auth_wrapper.dart
+├── firebase_options.dart
 └── main.dart
 ```
 

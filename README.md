@@ -157,14 +157,18 @@ The project includes unit and widget tests for the main authentication-related U
 
 The test suite covers:
 
+* User model test
+* Welcome preferences service test
 * Validators
-* `AuthTextField`
-* `AuthButton`
+* AuthTextField widget
+* AuthButton widget
 * Login screen
 * Signup screen
 * Forgot password screen
+* Verify email screen
+* Welcome screen test
 
-The current test suite contains **44 passing tests**.
+The current test suite contains **53 passing tests**.
 
 Run all tests with:
 

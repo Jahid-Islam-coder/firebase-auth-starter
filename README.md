@@ -38,9 +38,11 @@ The goal was to keep the project simple while still following a clean structure 
 
 ### Forgot Password
 
-
+![Forgot Password](screenshots/forgot password.png)
 
 ### Email Verification
+
+![Email Verification](screenshots/email verification.png)
 
 
 

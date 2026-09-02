@@ -16,6 +16,7 @@ The goal was to keep the project simple while still following a clean structure 
 * Email verification flow
 * Password reset
 * Authentication state handling with `AuthWrapper`
+* Store user profiles in Cloud Firestore
 * Form validation
 * Password visibility toggle
 * Loading states during authentication
@@ -264,7 +265,6 @@ One thing I found useful was seeing how a small change to a shared widget, like 
 
 A few things I may add in future updates:
 
-* Store user profiles in Cloud Firestore
 * Add GitHub Actions CI to automatically run `flutter analyze` and `flutter test`
 
 ---

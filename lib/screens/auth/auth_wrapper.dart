@@ -32,7 +32,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
     super.initState();
 
     // Set initial state from current user
-    _user = FirebaseAuth.instance.currentUser;
+    _user = AuthService.instance.currentUser;
     if (_user != null) {
       _isLoading = false;
       _handleAuthStateChange(_user);
@@ -94,13 +94,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
   }
 
   Future<void> refreshAuthState() async {
-    final user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-    await user.reload();
-    }
-
-
+    await AuthService.instance.refreshUser();
   }
 
   void _onWelcomeFinished() {

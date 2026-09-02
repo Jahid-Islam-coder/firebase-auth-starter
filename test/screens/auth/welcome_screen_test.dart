@@ -39,8 +39,15 @@ void main() {
         ),
       );
 
-      // Advance time for the animations and the 2-second delay
-      await tester.pumpAndSettle(const Duration(seconds: 5));
+      // Advance animations
+      await tester.pumpAndSettle();
+      
+      // Advance the 2-second delay
+      await tester.pump(const Duration(seconds: 2));
+      
+      // Allow for the async SharedPreferences call and the subsequent onFinished callback
+      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(finishedCalled, isTrue);
     });

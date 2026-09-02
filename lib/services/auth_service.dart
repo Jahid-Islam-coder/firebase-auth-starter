@@ -1,27 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class AuthService {
-  AuthService._();
+  AuthService({FirebaseAuth? auth}) : _auth = auth;
 
-  static final AuthService instance = AuthService._();
+  static AuthService instance = AuthService();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth? _auth;
 
-  Stream<User?> get authStateChanges => _auth.authStateChanges();
+  FirebaseAuth get _firebaseAuth => _auth ?? FirebaseAuth.instance;
 
-  Stream<User?> get userChanges => _auth.userChanges();
+  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  User? get currentUser => _auth.currentUser;
+  Stream<User?> get userChanges => _firebaseAuth.userChanges();
+
+  User? get currentUser => _firebaseAuth.currentUser;
 
   bool get isEmailVerified {
-    return _auth.currentUser?.emailVerified ?? false;
+    return _firebaseAuth.currentUser?.emailVerified ?? false;
   }
 
   Future<UserCredential> register({
     required String email,
     required String password,
   }) {
-    return _auth.createUserWithEmailAndPassword(
+    return _firebaseAuth.createUserWithEmailAndPassword(
       email: email.trim(),
       password: password,
     );
@@ -31,26 +34,26 @@ class AuthService {
     required String email,
     required String password,
   }) {
-    return _auth.signInWithEmailAndPassword(
+    return _firebaseAuth.signInWithEmailAndPassword(
       email: email.trim(),
       password: password,
     );
   }
 
   Future<void> logout() {
-    return _auth.signOut();
+    return _firebaseAuth.signOut();
   }
 
   Future<void> sendPasswordResetEmail({
     required String email,
   }) {
-    return _auth.sendPasswordResetEmail(
+    return _firebaseAuth.sendPasswordResetEmail(
       email: email.trim(),
     );
   }
 
   Future<void> sendEmailVerification() async {
-    final user = _auth.currentUser;
+    final user = _firebaseAuth.currentUser;
 
     if (user == null) {
       throw FirebaseAuthException(
@@ -65,10 +68,10 @@ class AuthService {
   }
 
   Future<User?> refreshUser() async {
-    final user = FirebaseAuth.instance.currentUser;
+    final user = _firebaseAuth.currentUser;
 
     await user?.reload();
 
-    return FirebaseAuth.instance.currentUser;
+    return _firebaseAuth.currentUser;
   }
 }

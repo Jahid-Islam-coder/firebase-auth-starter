@@ -1,5 +1,4 @@
 import 'package:firebase_auth_starter/screens/auth/verify_email_screen.dart';
-import 'package:firebase_auth_starter/screens/auth/welcome_screen_%20animation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +27,7 @@ class FirebaseAuthStarterApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.indigo,
       ),
-      home:  WelcomeScreen (userId: '', onFinished: () {  },),
+      home: const VerifyEmailScreen(),
     );
   }
 }

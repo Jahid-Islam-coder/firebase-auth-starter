@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_starter/services/add_user_info.dart';
 import 'package:flutter/material.dart';
 
 import '../../../services/auth_service.dart';
 import '../../../utils/validators.dart';
 import '../../../widgets/auth_text_field.dart';
+import '../../models/user_model.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -55,10 +57,32 @@ class _SignupScreenState extends State<SignupScreen> {
     });
 
     try {
-      await AuthService.instance.register(
+      final userCredential = await AuthService.instance.register(
         email: _emailController.text,
         password: _passwordController.text,
       );
+
+      // Send verification email right after registration
+      await AuthService.instance.sendEmailVerification();
+
+      UserModel user = UserModel(
+        name: _nameController.text,
+        email: _emailController.text,
+        phone: _phoneController.text,
+      );
+
+      // Use the actual UID from the registered user
+      await UserDatabaseMethods.addMembersInfo(
+        userCredential.user!.uid,
+        user.toMap(),
+        context,
+      );
+
+      if (mounted) {
+        // Pop the signup screen so the user sees the VerifyEmailScreen
+        // which is being displayed by AuthWrapper
+        Navigator.of(context).pop();
+      }
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
 

@@ -65,8 +65,10 @@ class AuthService {
   }
 
   Future<User?> refreshUser() async {
-    await _auth.currentUser?.reload();
+    final user = FirebaseAuth.instance.currentUser;
 
-    return _auth.currentUser;
+    await user?.reload();
+
+    return FirebaseAuth.instance.currentUser;
   }
 }

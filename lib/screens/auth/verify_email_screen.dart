@@ -4,6 +4,8 @@ import 'dart:async';
 
 import '../../services/auth_service.dart';
 
+
+
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});
 
@@ -192,6 +194,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   const Icon(
                     Icons.mark_email_unread_outlined,
                     size: 96,
+                    color: Color(0xFF5D12B5),
                   ),
 
                   const SizedBox(height: 32),
@@ -244,6 +247,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                     width: double.infinity,
                     height: 52,
                     child: FilledButton(
+                      style: FilledButton.styleFrom(
+                        backgroundColor: const Color(0xFF5D12B5),
+                      ),
                       onPressed:
                       _isChecking ? null : _checkVerification,
                       child: _isChecking

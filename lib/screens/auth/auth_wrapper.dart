@@ -52,7 +52,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
       _isLoading = false;
     });
 
-    // No signed-in user means there is no welcome preference to load.
+
     if (user == null) {
       if (!mounted) return;
 
@@ -64,7 +64,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
       return;
     }
 
-    // Load the welcome status for the currently signed-in user.
+    // Loads the welcome status for the currently signed-in user.
     setState(() {
       _isWelcomeLoading = true;
     });
@@ -72,7 +72,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
     try {
       final hasSeenWelcome = await WelcomePreferences.hasSeenWelcome(user.uid);
 
-      // The active user may have changed while SharedPreferences was loading.
+
       if (!mounted || _user?.uid != user.uid) return;
 
       setState(() {

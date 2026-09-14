@@ -27,7 +27,7 @@ class FirebaseAuthStarterApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.indigo,
       ),
-      home: const VerifyEmailScreen(),
+      home: const AuthWrapper(),
     );
   }
 }

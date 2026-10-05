@@ -1,0 +1,50 @@
+name: Flutter CI Pipeline
+
+# Trigger CI on pushes and pull requests to main/master branches
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  ci_pipeline:
+    name: Flutter Quality & Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      # Setting up Java 17 here because the Android Gradle plugin
+      # needs it for building. Learned this the hard way! ☕
+      - name: Set up Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Setting up Flutter SDK with caching enabled for fast CI runs 🚀
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v3
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Install Pub Dependencies
+        run: flutter pub get
+
+      # Making sure code formatting is correct before running tests
+      - name: Verify Code Formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Run Static Analysis
+        run: flutter analyze
+
+      - name: Run Unit & Widget Tests
+        run: flutter test
+
+      # Check build to be sure no Gradle errors or warnings
+      - name: Build Debug APK
+        run: flutter build apk --debug

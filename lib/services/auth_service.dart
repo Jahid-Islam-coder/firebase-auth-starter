@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // This is where we handle all the Firebase login and sign up stuff
 class AuthService {
+  // ignore: prefer_initializing_formals
   AuthService({FirebaseAuth? auth}) : _auth = auth;
 
   // We use a singleton so we can access this service from anywhere
@@ -18,68 +19,56 @@ class AuthService {
   // Similar to authStateChanges but also gives updates for things like email verification
   Stream<User?> get userChanges => _firebaseAuth.userChanges();
 
-  // Get the current user that is signed in
+  // Get current user
   User? get currentUser => _firebaseAuth.currentUser;
 
-  // Check if the user has clicked the verification link in their email
-  bool get isEmailVerified {
-    return _firebaseAuth.currentUser?.emailVerified ?? false;
+  // Refresh current user
+  Future<User?> refreshUser() async {
+    User? user = _firebaseAuth.currentUser;
+    if (user != null) {
+      await user.reload();
+      user = _firebaseAuth.currentUser;
+    }
+    return user;
   }
 
-  // Create a new user with an email and password
-  Future<UserCredential> register({
-    required String email,
-    required String password,
-  }) {
-    return _firebaseAuth.createUserWithEmailAndPassword(
-      email: email.trim(),
-      password: password,
-    );
-  }
-
-  // Sign in an existing user
+  // Login with email and password
   Future<UserCredential> login({
     required String email,
     required String password,
-  }) {
-    return _firebaseAuth.signInWithEmailAndPassword(
-      email: email.trim(),
+  }) async {
+    return await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
       password: password,
     );
   }
 
-  // Sign out the user from the app
-  Future<void> logout() {
-    return _firebaseAuth.signOut();
+  // Register with email and password
+  Future<UserCredential> register({
+    required String email,
+    required String password,
+  }) async {
+    return await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
-  // Send an email to reset the password if they forgot it
-  Future<void> sendPasswordResetEmail({required String email}) {
-    return _firebaseAuth.sendPasswordResetEmail(email: email.trim());
-  }
-
-  // Send a link to the user's email to verify they own it
+  // Send email verification
   Future<void> sendEmailVerification() async {
-    final user = _firebaseAuth.currentUser;
-
-    if (user == null) {
-      throw FirebaseAuthException(
-        code: 'no-user',
-        message: 'No authenticated user found.',
-      );
-    }
-
-    if (!user.emailVerified) {
+    User? user = _firebaseAuth.currentUser;
+    if (user != null && !user.emailVerified) {
       await user.sendEmailVerification();
     }
   }
 
-  // Refresh the user data to see if they just verified their email
-  Future<User?> refreshUser() async {
-    final user = _firebaseAuth.currentUser;
+  // Send password reset email
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 
-    await user?.reload();
-
-    return _firebaseAuth.currentUser;
+  // Logout
+  Future<void> logout() async {
+    await _firebaseAuth.signOut();
   }
 }

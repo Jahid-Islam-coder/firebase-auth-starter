@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore: unnecessary_import
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class UserDatabaseMethods {
@@ -18,6 +20,7 @@ class UserDatabaseMethods {
           .get();
 
       if (duplicateCheck.docs.isNotEmpty) {
+        if (!context.mounted) return;
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(const SnackBar(content: Text("Member Already Exist")));
@@ -28,7 +31,7 @@ class UserDatabaseMethods {
 
       await _db.collection('members').doc(id).set(membersInfoMap);
     } catch (e) {
-      print("Payment Error: $e");
+      debugPrint("Payment Error: $e");
     }
   }
 }

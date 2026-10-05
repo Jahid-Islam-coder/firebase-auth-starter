@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_starter/services/add_user_info.dart';
 import 'package:flutter/material.dart';
@@ -85,10 +86,9 @@ class _SignupScreenState extends State<SignupScreen> {
         context,
       );
 
-      if (mounted) {
-        // Go back to the previous screen (usually the login/wrapper)
-        Navigator.of(context).pop();
-      }
+      if (!context.mounted) return;
+      // Go back to the previous screen (usually the login/wrapper)
+      Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
 

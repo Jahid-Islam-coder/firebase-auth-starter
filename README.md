@@ -45,8 +45,6 @@ The goal was to keep the project simple while still following a clean structure 
 
 ![Email Verification](screenshots/email-verification.png)
 
-
-
 ---
 
 ## Tech Stack & Tools

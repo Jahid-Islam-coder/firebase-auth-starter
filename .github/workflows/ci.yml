@@ -26,7 +26,7 @@ jobs:
 
       # Setting up Flutter SDK with caching enabled for fast CI runs 🚀
       - name: Set up Flutter SDK
-        uses: subosito/flutter-action@v3
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.x'
           channel: 'stable'

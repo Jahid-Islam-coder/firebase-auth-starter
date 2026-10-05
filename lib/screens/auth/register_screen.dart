@@ -50,9 +50,7 @@ class _SignupScreenState extends State<SignupScreen> {
     if (!_agreeToTerms) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-            'Please agree to the Terms & Conditions.',
-          ),
+          content: Text('Please agree to the Terms & Conditions.'),
         ),
       );
 
@@ -95,20 +93,16 @@ class _SignupScreenState extends State<SignupScreen> {
       if (!mounted) return;
 
       // Show a message if registration failed
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(_firebaseError(e)),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(_firebaseError(e))));
     } catch (_) {
       if (!mounted) return;
 
       // Show a generic message for other errors
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-            'Something went wrong. Please try again.',
-          ),
+          content: Text('Something went wrong. Please try again.'),
         ),
       );
     } finally {
@@ -146,7 +140,6 @@ class _SignupScreenState extends State<SignupScreen> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-
             return SingleChildScrollView(
               child: Center(
                 child: Container(
@@ -154,10 +147,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     gradient: const LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFF4D0BA8),
-                        Color(0xFF7926D6),
-                      ],
+                      colors: [Color(0xFF4D0BA8), Color(0xFF7926D6)],
                     ),
                   ),
                   clipBehavior: Clip.antiAlias,
@@ -176,36 +166,18 @@ class _SignupScreenState extends State<SignupScreen> {
     return Stack(
       children: [
         // Background decorations
-        Positioned(
-          top: -70,
-          right: -45,
-          child: _CircleDecoration(size: 170),
-        ),
+        Positioned(top: -70, right: -45, child: _CircleDecoration(size: 170)),
 
-        Positioned(
-          top: 170,
-          left: -55,
-          child: _CircleDecoration(size: 120),
-        ),
+        Positioned(top: 170, left: -55, child: _CircleDecoration(size: 120)),
 
-        Positioned(
-          bottom: 100,
-          right: 40,
-          child: _CircleDecoration(size: 75),
-        ),
+        Positioned(bottom: 100, right: 40, child: _CircleDecoration(size: 75)),
 
         Padding(
-          padding: const EdgeInsets.fromLTRB(
-            45,
-            216,
-            45,
-            45,
-          ),
+          padding: const EdgeInsets.fromLTRB(45, 216, 45, 45),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-
                 const Text(
                   'Sign up',
                   style: TextStyle(
@@ -224,8 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   icon: Icons.person_outline,
                   style: AuthTextFieldStyle.purple,
                   validator: (value) {
-                    if (value == null ||
-                        value.trim().isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'Full name is required';
                     }
 
@@ -255,8 +226,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   keyboardType: TextInputType.phone,
                   style: AuthTextFieldStyle.purple,
                   validator: (value) {
-                    if (value == null ||
-                        value.trim().isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'Phone number is required';
                     }
 
@@ -278,8 +248,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     onPressed: () {
                       setState(() {
                         // Toggle password visibility
-                        _obscurePassword =
-                        !_obscurePassword;
+                        _obscurePassword = !_obscurePassword;
                       });
                     },
                     icon: Icon(
@@ -303,19 +272,14 @@ class _SignupScreenState extends State<SignupScreen> {
                           _agreeToTerms = value ?? false;
                         });
                       },
-                      side: const BorderSide(
-                        color: Colors.white,
-                      ),
-                      checkColor:  Colors.white,
+                      side: const BorderSide(color: Colors.white),
+                      checkColor: Colors.white,
                     ),
 
                     const Expanded(
                       child: Text(
                         'Yes! I Agree all Terms & Condition',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 14),
                       ),
                     ),
                   ],
@@ -335,20 +299,17 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     child: _isLoading
                         ? const SizedBox(
-                      width: 23,
-                      height: 23,
-                      child:
-                      CircularProgressIndicator(
-                        strokeWidth: 2,
-                      ),
-                    )
+                            width: 23,
+                            height: 23,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
                         : const Text(
-                      'Sign up',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                            'Sign up',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                   ),
                 ),
 
@@ -356,15 +317,11 @@ class _SignupScreenState extends State<SignupScreen> {
 
                 // Back to login link
                 Row(
-                  mainAxisAlignment:
-                  MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
                       'Already have an account? ',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -392,9 +349,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
 // Decoration circle widget
 class _CircleDecoration extends StatelessWidget {
-  const _CircleDecoration({
-    required this.size,
-  });
+  const _CircleDecoration({required this.size});
 
   final double size;
 

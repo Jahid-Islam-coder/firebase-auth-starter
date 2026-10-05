@@ -16,16 +16,16 @@ void main() {
 
     // Default mock behaviors
     when(() => mockAuthService.currentUser).thenReturn(null);
-    when(() => mockAuthService.userChanges).thenAnswer((_) => Stream.value(null));
+    when(
+      () => mockAuthService.userChanges,
+    ).thenAnswer((_) => Stream.value(null));
   });
 
-  testWidgets('App smoke test - starts with AuthWrapper', (WidgetTester tester) async {
+  testWidgets('App smoke test - starts with AuthWrapper', (
+    WidgetTester tester,
+  ) async {
     // Build app and trigger a frame
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: AuthWrapper(),
-      ),
-    );
+    await tester.pumpWidget(const MaterialApp(home: AuthWrapper()));
 
     // After loading, since no user is logged in, it should show LoginScreen
     await tester.pumpAndSettle();

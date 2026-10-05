@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../services/welcome_preferences.dart';
 
-
 class WelcomeScreen extends StatefulWidget {
   final String userId;
   final VoidCallback onFinished;
@@ -51,18 +50,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       curve: Curves.easeIn,
     );
 
-    _contentSlideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.25),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _contentController,
-        curve: Curves.easeOutCubic,
-      ),
-    );
+    _contentSlideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.25), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _contentController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
     _startAnimation();
-
   }
 
   Future<void> _startAnimation() async {
@@ -72,18 +68,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     await _contentController.forward();
 
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
+    await Future.delayed(const Duration(seconds: 2));
 
-    await WelcomePreferences.markWelcomeAsSeen(
-      widget.userId,
-    );
+    await WelcomePreferences.markWelcomeAsSeen(widget.userId);
 
     if (!mounted) return;
 
     widget.onFinished();
-
   }
 
   @override

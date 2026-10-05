@@ -115,11 +115,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
   Widget build(BuildContext context) {
     // Show a loading circle if we are still checking stuff
     if (_isLoading || _isWelcomeLoading) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     // If no user, show the login screen
@@ -134,10 +130,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
     // If they haven't seen the welcome message, show that first
     if (!_hasSeenWelcome) {
-      return WelcomeScreen(
-        userId: _user!.uid,
-        onFinished: _onWelcomeFinished,
-      );
+      return WelcomeScreen(userId: _user!.uid, onFinished: _onWelcomeFinished);
     }
 
     // Finally, if everything is good, show the home screen!

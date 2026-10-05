@@ -18,9 +18,7 @@ void main() {
   });
 
   Widget createVerifyEmailScreen() {
-    return const MaterialApp(
-      home: VerifyEmailScreen(),
-    );
+    return const MaterialApp(home: VerifyEmailScreen());
   }
 
   group('VerifyEmailScreen', () {
@@ -34,8 +32,10 @@ void main() {
       expect(find.byIcon(Icons.mark_email_unread_outlined), findsOneWidget);
       expect(find.byIcon(Icons.logout), findsOneWidget);
     });
-    
-    testWidgets('shows loading indicator on buttons when state is loading', (tester) async {
+
+    testWidgets('shows loading indicator on buttons when state is loading', (
+      tester,
+    ) async {
       await tester.pumpWidget(createVerifyEmailScreen());
 
       expect(find.byType(CircularProgressIndicator), findsNothing);

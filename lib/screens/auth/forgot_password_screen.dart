@@ -9,8 +9,7 @@ class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() =>
-      _ForgotPasswordScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
@@ -48,19 +47,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(_getFirebaseErrorMessage(e)),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(_getFirebaseErrorMessage(e))));
     } catch (_) {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-            'Something went wrong. Please try again.',
-          ),
+          content: Text('Something went wrong. Please try again.'),
         ),
       );
     } finally {
@@ -87,28 +82,21 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         return 'Network error. Please check your connection.';
 
       default:
-        return e.message ??
-            'Unable to send password reset email.';
+        return e.message ?? 'Unable to send password reset email.';
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Forgot Password'),
-      ),
+      appBar: AppBar(title: const Text('Forgot Password')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 420,
-              ),
-              child: _emailSent
-                  ? _buildSuccessContent()
-                  : _buildResetForm(),
+              constraints: const BoxConstraints(maxWidth: 420),
+              child: _emailSent ? _buildSuccessContent() : _buildResetForm(),
             ),
           ),
         ),
@@ -133,19 +121,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           Text(
             'Reset your password',
             textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headlineMedium
-                ?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 12),
 
           Text(
             'Enter the email address associated with your account '
-                'and we will send you a password reset link.',
+            'and we will send you a password reset link.',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
@@ -195,22 +180,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Icon(
-          Icons.mark_email_read_outlined,
-          size: 80,
-        ),
+        const Icon(Icons.mark_email_read_outlined, size: 80),
 
         const SizedBox(height: 24),
 
         Text(
           'Check your email',
           textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium
-              ?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
 
         const SizedBox(height: 12),
@@ -226,19 +205,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         Text(
           _emailController.text.trim(),
           textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
-              ?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
 
         const SizedBox(height: 16),
 
         Text(
           'Open the email and follow the instructions '
-              'to create a new password.',
+          'to create a new password.',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
@@ -258,10 +234,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           onPressed: _isLoading
               ? null
               : () {
-            setState(() {
-              _emailSent = false;
-            });
-          },
+                  setState(() {
+                    _emailSent = false;
+                  });
+                },
           child: const Text('Use a different email'),
         ),
       ],

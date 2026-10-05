@@ -23,9 +23,6 @@ class WelcomePreferences {
     final preferences = await SharedPreferences.getInstance();
 
     // Set the value to true in the phone's storage
-    await preferences.setBool(
-      _welcomeKey(userId),
-      true,
-    );
+    await preferences.setBool(_welcomeKey(userId), true);
   }
 }

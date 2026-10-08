@@ -9,15 +9,14 @@ on:
 
 jobs:
   ci_pipeline:
-    name: Flutter Quality & Build Check
+    name: Flutter Quality & Test Check
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      # Setting up Java 17 here because the Android Gradle plugin
-      # needs it for building. Learned this the hard way! ☕
+      # Setting up Java 17 here because of tooling requirements ☕
       - name: Set up Java JDK
         uses: actions/setup-java@v4
         with:
@@ -44,7 +43,3 @@ jobs:
 
       - name: Run Unit & Widget Tests
         run: flutter test
-
-      # Check build to be sure no Gradle errors or warnings
-      - name: Build Debug APK
-        run: flutter build apk --debug

@@ -44,3 +44,7 @@ app.*.map.json
 
 # Local Android user home and gradle caches
 android/.user_home/
+android/build/
+android/app/build/
+android/.gradle/
+.gradle/

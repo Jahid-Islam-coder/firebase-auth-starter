@@ -105,7 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
+        top: false,
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
@@ -165,7 +167,7 @@ class _LoginHeader extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFF4D0BA8), Color(0xFF7A28D9)],
+              colors: [Color(0xFF5D1AB5), Color(0xFF7A28D9)],
             ),
           ),
           child: Stack(

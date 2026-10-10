@@ -137,26 +137,30 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Color(0xFF4D0BA8), Color(0xFF7926D6)],
-                    ),
+      backgroundColor: const Color(0xFF5D1AB5),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+              ),
+              child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xFF5D1AB5), Color(0xFF7926D6)],
                   ),
-                  clipBehavior: Clip.antiAlias,
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: SafeArea(
                   child: _buildContent(),
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -173,7 +177,7 @@ class _SignupScreenState extends State<SignupScreen> {
         Positioned(bottom: 100, right: 40, child: _CircleDecoration(size: 75)),
 
         Padding(
-          padding: const EdgeInsets.fromLTRB(45, 216, 45, 45),
+          padding: const EdgeInsets.fromLTRB(45, 140, 45, 45),
           child: Form(
             key: _formKey,
             child: Column(

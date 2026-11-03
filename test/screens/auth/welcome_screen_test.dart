@@ -1,4 +1,4 @@
-import 'package:firebase_auth_starter/screens/auth/welcome_screen_%20animation.dart';
+import 'package:firebase_auth_starter/screens/auth/welcome_screen_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';

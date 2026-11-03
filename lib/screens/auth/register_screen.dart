@@ -78,6 +78,8 @@ class _SignupScreenState extends State<SignupScreen> {
         phone: _phoneController.text,
       );
 
+      if (!mounted) return;
+
       // Step 4: Save that extra info to the Firestore database
       await UserDatabaseMethods.addMembersInfo(
         userCredential.user!.uid,

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // This is where we handle all the Firebase login and sign up stuff
 class AuthService {
-  AuthService({FirebaseAuth? auth}) : _auth = auth;
+  AuthService({this._auth});
 
   // We use a singleton so we can access this service from anywhere
   static AuthService instance = AuthService();

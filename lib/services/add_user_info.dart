@@ -18,6 +18,7 @@ class UserDatabaseMethods {
           .get();
 
       if (duplicateCheck.docs.isNotEmpty) {
+        if (!context.mounted) return;
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(const SnackBar(content: Text("Member Already Exist")));
@@ -28,7 +29,7 @@ class UserDatabaseMethods {
 
       await _db.collection('members').doc(id).set(membersInfoMap);
     } catch (e) {
-      print("Payment Error: $e");
+      debugPrint("Payment Error: $e");
     }
   }
 }

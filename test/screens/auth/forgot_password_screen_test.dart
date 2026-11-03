@@ -6,9 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   Widget createForgotPasswordScreen() {
-    return const MaterialApp(
-      home: ForgotPasswordScreen(),
-    );
+    return const MaterialApp(home: ForgotPasswordScreen());
   }
 
   group('ForgotPasswordScreen', () {
@@ -47,7 +45,9 @@ void main() {
       expect(find.text('Email is required'), findsOneWidget);
     });
 
-    testWidgets('shows invalid email error when email format is incorrect', (tester) async {
+    testWidgets('shows invalid email error when email format is incorrect', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() {
@@ -67,7 +67,9 @@ void main() {
       expect(find.text('Enter a valid email'), findsOneWidget);
     });
 
-    testWidgets('navigates back when Back to Sign In is pressed', (tester) async {
+    testWidgets('navigates back when Back to Sign In is pressed', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() {

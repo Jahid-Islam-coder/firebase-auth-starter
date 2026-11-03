@@ -12,17 +12,17 @@ void main() {
     testWidgets('renders initial state correctly', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: WelcomeScreen(
-            userId: 'test_user',
-            onFinished: () {},
-          ),
+          home: WelcomeScreen(userId: 'test_user', onFinished: () {}),
         ),
       );
 
       // Check for static elements
       expect(find.byIcon(Icons.check), findsOneWidget);
       expect(find.text('Welcome! 👋'), findsOneWidget);
-      expect(find.text('Your account is ready.\nLet’s get started!'), findsOneWidget);
+      expect(
+        find.text('Your account is ready.\nLet’s get started!'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('calls onFinished after animation', (tester) async {
@@ -41,10 +41,10 @@ void main() {
 
       // Advance animations
       await tester.pumpAndSettle();
-      
+
       // Advance the 2-second delay
       await tester.pump(const Duration(seconds: 2));
-      
+
       // Allow for the async SharedPreferences call and the subsequent onFinished callback
       await tester.pump();
       await tester.pumpAndSettle();

@@ -54,12 +54,8 @@ class AuthService {
   }
 
   // Send an email to reset the password if they forgot it
-  Future<void> sendPasswordResetEmail({
-    required String email,
-  }) {
-    return _firebaseAuth.sendPasswordResetEmail(
-      email: email.trim(),
-    );
+  Future<void> sendPasswordResetEmail({required String email}) {
+    return _firebaseAuth.sendPasswordResetEmail(email: email.trim());
   }
 
   // Send a link to the user's email to verify they own it

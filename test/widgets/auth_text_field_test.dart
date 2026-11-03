@@ -34,357 +34,245 @@ void main() {
   }
 
   group('AuthTextField', () {
-    testWidgets(
-      'displays label and prefix icon',
-          (tester) async {
-        final controller = TextEditingController();
+    testWidgets('displays label and prefix icon', (tester) async {
+      final controller = TextEditingController();
 
-        await tester.pumpWidget(
-          createTestWidget(
-            controller: controller,
-            label: 'Email',
-            icon: Icons.email_outlined,
-          ),
-        );
+      await tester.pumpWidget(
+        createTestWidget(
+          controller: controller,
+          label: 'Email',
+          icon: Icons.email_outlined,
+        ),
+      );
 
-        expect(
-          find.text('Email'),
-          findsOneWidget,
-        );
+      expect(find.text('Email'), findsOneWidget);
 
-        expect(
-          find.byIcon(Icons.email_outlined),
-          findsOneWidget,
-        );
+      expect(find.byIcon(Icons.email_outlined), findsOneWidget);
 
-        controller.dispose();
-      },
-    );
+      controller.dispose();
+    });
 
-    testWidgets(
-      'accepts user input',
-          (tester) async {
-        final controller = TextEditingController();
+    testWidgets('accepts user input', (tester) async {
+      final controller = TextEditingController();
 
-        await tester.pumpWidget(
-          createTestWidget(
-            controller: controller,
-          ),
-        );
+      await tester.pumpWidget(createTestWidget(controller: controller));
 
-        await tester.enterText(
-          find.byType(TextFormField),
-          'test@example.com',
-        );
+      await tester.enterText(find.byType(TextFormField), 'test@example.com');
 
-        expect(
-          controller.text,
-          'test@example.com',
-        );
+      expect(controller.text, 'test@example.com');
 
-        controller.dispose();
-      },
-    );
+      controller.dispose();
+    });
 
-    testWidgets(
-      'uses provided keyboard type',
-          (tester) async {
-        final controller = TextEditingController();
+    testWidgets('uses provided keyboard type', (tester) async {
+      final controller = TextEditingController();
 
-        await tester.pumpWidget(
-          createTestWidget(
-            controller: controller,
-            keyboardType: TextInputType.emailAddress,
-          ),
-        );
+      await tester.pumpWidget(
+        createTestWidget(
+          controller: controller,
+          keyboardType: TextInputType.emailAddress,
+        ),
+      );
 
-        final textField = tester.widget<TextField>(
-          find.byType(TextField),
-        );
+      final textField = tester.widget<TextField>(find.byType(TextField));
 
-        expect(
-          textField.keyboardType,
-          TextInputType.emailAddress,
-        );
+      expect(textField.keyboardType, TextInputType.emailAddress);
 
-        controller.dispose();
-      },
-    );
+      controller.dispose();
+    });
 
-    testWidgets(
-      'hides text when obscureText is enabled',
-          (tester) async {
-        final controller = TextEditingController();
+    testWidgets('hides text when obscureText is enabled', (tester) async {
+      final controller = TextEditingController();
 
-        await tester.pumpWidget(
-          createTestWidget(
-            controller: controller,
-            label: 'Password',
-            icon: Icons.lock_outline,
-            obscureText: true,
-          ),
-        );
+      await tester.pumpWidget(
+        createTestWidget(
+          controller: controller,
+          label: 'Password',
+          icon: Icons.lock_outline,
+          obscureText: true,
+        ),
+      );
 
-        final textField = tester.widget<TextField>(
-          find.byType(TextField),
-        );
+      final textField = tester.widget<TextField>(find.byType(TextField));
 
-        expect(
-          textField.obscureText,
-          true,
-        );
+      expect(textField.obscureText, true);
 
-        controller.dispose();
-      },
-    );
+      controller.dispose();
+    });
 
-    testWidgets(
-      'does not hide text by default',
-          (tester) async {
-        final controller = TextEditingController();
+    testWidgets('does not hide text by default', (tester) async {
+      final controller = TextEditingController();
 
-        await tester.pumpWidget(
-          createTestWidget(
-            controller: controller,
-          ),
-        );
+      await tester.pumpWidget(createTestWidget(controller: controller));
 
-        final textField = tester.widget<TextField>(
-          find.byType(TextField),
-        );
+      final textField = tester.widget<TextField>(find.byType(TextField));
 
-        expect(
-          textField.obscureText,
-          false,
-        );
+      expect(textField.obscureText, false);
 
-        controller.dispose();
-      },
-    );
+      controller.dispose();
+    });
 
-    testWidgets(
-      'displays suffix icon when provided',
-          (tester) async {
-        final controller = TextEditingController();
+    testWidgets('displays suffix icon when provided', (tester) async {
+      final controller = TextEditingController();
 
-        await tester.pumpWidget(
-          createTestWidget(
-            controller: controller,
-            label: 'Password',
-            icon: Icons.lock_outline,
-            suffixIcon: const Icon(
-              Icons.visibility_outlined,
-            ),
-          ),
-        );
+      await tester.pumpWidget(
+        createTestWidget(
+          controller: controller,
+          label: 'Password',
+          icon: Icons.lock_outline,
+          suffixIcon: const Icon(Icons.visibility_outlined),
+        ),
+      );
 
-        expect(
-          find.byIcon(Icons.visibility_outlined),
-          findsOneWidget,
-        );
+      expect(find.byIcon(Icons.visibility_outlined), findsOneWidget);
 
-        controller.dispose();
-      },
-    );
+      controller.dispose();
+    });
 
-    testWidgets(
-      'runs validator when form is submitted',
-          (tester) async {
-        final controller = TextEditingController();
-        final formKey = GlobalKey<FormState>();
+    testWidgets('runs validator when form is submitted', (tester) async {
+      final controller = TextEditingController();
+      final formKey = GlobalKey<FormState>();
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: Form(
-                key: formKey,
-                child: AuthTextField(
-                  controller: controller,
-                  label: 'Email',
-                  icon: Icons.email_outlined,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Email is required';
-                    }
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Form(
+              key: formKey,
+              child: AuthTextField(
+                controller: controller,
+                label: 'Email',
+                icon: Icons.email_outlined,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Email is required';
+                  }
 
-                    return null;
-                  },
-                ),
+                  return null;
+                },
               ),
             ),
           ),
-        );
+        ),
+      );
 
-        formKey.currentState!.validate();
+      formKey.currentState!.validate();
 
-        await tester.pump();
+      await tester.pump();
 
-        expect(
-          find.text('Email is required'),
-          findsOneWidget,
-        );
+      expect(find.text('Email is required'), findsOneWidget);
 
-        controller.dispose();
-      },
-    );
+      controller.dispose();
+    });
 
     group('light style', () {
-      testWidgets(
-        'uses dark text color',
-            (tester) async {
-          final controller = TextEditingController();
+      testWidgets('uses dark text color', (tester) async {
+        final controller = TextEditingController();
 
-          await tester.pumpWidget(
-            createTestWidget(
-              controller: controller,
-              style: AuthTextFieldStyle.light,
-            ),
-          );
+        await tester.pumpWidget(
+          createTestWidget(
+            controller: controller,
+            style: AuthTextFieldStyle.light,
+          ),
+        );
 
-          final textField = tester.widget<TextField>(
-            find.byType(TextField),
-          );
+        final textField = tester.widget<TextField>(find.byType(TextField));
 
-          expect(
-            textField.style?.color,
-            Colors.black87,
-          );
+        expect(textField.style?.color, Colors.black87);
 
-          controller.dispose();
-        },
-      );
+        controller.dispose();
+      });
 
-      testWidgets(
-        'uses purple cursor color',
-            (tester) async {
-          final controller = TextEditingController();
+      testWidgets('uses purple cursor color', (tester) async {
+        final controller = TextEditingController();
 
-          await tester.pumpWidget(
-            createTestWidget(
-              controller: controller,
-              style: AuthTextFieldStyle.light,
-            ),
-          );
+        await tester.pumpWidget(
+          createTestWidget(
+            controller: controller,
+            style: AuthTextFieldStyle.light,
+          ),
+        );
 
-          final textField = tester.widget<TextField>(
-            find.byType(TextField),
-          );
+        final textField = tester.widget<TextField>(find.byType(TextField));
 
-          expect(
-            textField.cursorColor,
-            const Color(0xFF5D1AB5),
-          );
+        expect(textField.cursorColor, const Color(0xFF5D1AB5));
 
-          controller.dispose();
-        },
-      );
+        controller.dispose();
+      });
     });
 
     group('purple style', () {
-      testWidgets(
-        'uses white text color',
-            (tester) async {
-          final controller = TextEditingController();
+      testWidgets('uses white text color', (tester) async {
+        final controller = TextEditingController();
 
-          await tester.pumpWidget(
-            createTestWidget(
-              controller: controller,
-              style: AuthTextFieldStyle.purple,
-            ),
-          );
+        await tester.pumpWidget(
+          createTestWidget(
+            controller: controller,
+            style: AuthTextFieldStyle.purple,
+          ),
+        );
 
-          final textField = tester.widget<TextField>(
-            find.byType(TextField),
-          );
+        final textField = tester.widget<TextField>(find.byType(TextField));
 
-          expect(
-            textField.style?.color,
-            Colors.white,
-          );
+        expect(textField.style?.color, Colors.white);
 
-          controller.dispose();
-        },
-      );
+        controller.dispose();
+      });
 
-      testWidgets(
-        'uses white cursor color',
-            (tester) async {
-          final controller = TextEditingController();
+      testWidgets('uses white cursor color', (tester) async {
+        final controller = TextEditingController();
 
-          await tester.pumpWidget(
-            createTestWidget(
-              controller: controller,
-              style: AuthTextFieldStyle.purple,
-            ),
-          );
+        await tester.pumpWidget(
+          createTestWidget(
+            controller: controller,
+            style: AuthTextFieldStyle.purple,
+          ),
+        );
 
-          final textField = tester.widget<TextField>(
-            find.byType(TextField),
-          );
+        final textField = tester.widget<TextField>(find.byType(TextField));
 
-          expect(
-            textField.cursorColor,
-            Colors.white,
-          );
+        expect(textField.cursorColor, Colors.white);
 
-          controller.dispose();
-        },
-      );
+        controller.dispose();
+      });
 
-      testWidgets(
-        'uses purple style label color',
-            (tester) async {
-          final controller = TextEditingController();
+      testWidgets('uses purple style label color', (tester) async {
+        final controller = TextEditingController();
 
-          await tester.pumpWidget(
-            createTestWidget(
-              controller: controller,
-              style: AuthTextFieldStyle.purple,
-            ),
-          );
+        await tester.pumpWidget(
+          createTestWidget(
+            controller: controller,
+            style: AuthTextFieldStyle.purple,
+          ),
+        );
 
-          final textField = tester.widget<TextField>(
-            find.byType(TextField),
-          );
+        final textField = tester.widget<TextField>(find.byType(TextField));
 
-          final decoration = textField.decoration!;
+        final decoration = textField.decoration!;
 
-          final labelStyle = decoration.labelStyle!;
+        final labelStyle = decoration.labelStyle!;
 
-          expect(
-            labelStyle.color,
-            Colors.white70,
-          );
+        expect(labelStyle.color, Colors.white70);
 
-          controller.dispose();
-        },
-      );
+        controller.dispose();
+      });
 
-      testWidgets(
-        'uses white prefix icon color',
-            (tester) async {
-          final controller = TextEditingController();
+      testWidgets('uses white prefix icon color', (tester) async {
+        final controller = TextEditingController();
 
-          await tester.pumpWidget(
-            createTestWidget(
-              controller: controller,
-              icon: Icons.email_outlined,
-              style: AuthTextFieldStyle.purple,
-            ),
-          );
+        await tester.pumpWidget(
+          createTestWidget(
+            controller: controller,
+            icon: Icons.email_outlined,
+            style: AuthTextFieldStyle.purple,
+          ),
+        );
 
-          final icon = tester.widget<Icon>(
-            find.byIcon(Icons.email_outlined),
-          );
+        final icon = tester.widget<Icon>(find.byIcon(Icons.email_outlined));
 
-          expect(
-            icon.color,
-            Colors.white,
-          );
+        expect(icon.color, Colors.white);
 
-          controller.dispose();
-        },
-      );
+        controller.dispose();
+      });
     });
   });
 }

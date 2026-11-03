@@ -32,20 +32,14 @@ class HomeScreen extends StatelessWidget {
             children: [
               const CircleAvatar(
                 radius: 40,
-                child: Icon(
-                  Icons.person,
-                  size: 40,
-                ),
+                child: Icon(Icons.person, size: 40),
               ),
 
               const SizedBox(height: 20),
 
               Text(
                 'You are signed in!',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall
-                    ?.copyWith(
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),

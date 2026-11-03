@@ -5,40 +5,25 @@ import 'package:firebase_auth_starter/utils/validators.dart';
 void main() {
   group('Validators.email', () {
     test('returns error when email is empty', () {
-      expect(
-        Validators.email(''),
-        'Email is required',
-      );
+      expect(Validators.email(''), 'Email is required');
     });
 
     test('returns error when email is null', () {
-      expect(
-        Validators.email(null),
-        'Email is required',
-      );
+      expect(Validators.email(null), 'Email is required');
     });
 
     test('returns error when email is invalid', () {
-      expect(
-        Validators.email('hello'),
-        'Enter a valid email',
-      );
+      expect(Validators.email('hello'), 'Enter a valid email');
     });
 
     test('returns null when email is valid', () {
-      expect(
-        Validators.email('test@example.com'),
-        isNull,
-      );
+      expect(Validators.email('test@example.com'), isNull);
     });
   });
 
   group('Validators.password', () {
     test('returns error when password is empty', () {
-      expect(
-        Validators.password(''),
-        'Password is required',
-      );
+      expect(Validators.password(''), 'Password is required');
     });
 
     test('returns error when password is too short', () {
@@ -49,10 +34,7 @@ void main() {
     });
 
     test('returns null when password is valid', () {
-      expect(
-        Validators.password('password123'),
-        isNull,
-      );
+      expect(Validators.password('password123'), isNull);
     });
   });
 
@@ -66,22 +48,13 @@ void main() {
 
     test('returns error when passwords do not match', () {
       expect(
-        Validators.confirmPassword(
-          'different123',
-          'password123',
-        ),
+        Validators.confirmPassword('different123', 'password123'),
         'Passwords do not match',
       );
     });
 
     test('returns null when passwords match', () {
-      expect(
-        Validators.confirmPassword(
-          'password123',
-          'password123',
-        ),
-        isNull,
-      );
+      expect(Validators.confirmPassword('password123', 'password123'), isNull);
     });
   });
 }

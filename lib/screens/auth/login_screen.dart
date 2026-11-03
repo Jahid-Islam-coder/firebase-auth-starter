@@ -56,11 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       // Show an error message if Firebase says something is wrong
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(_firebaseError(e)),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(_firebaseError(e))));
     } catch (_) {
       if (!mounted) return;
 
@@ -110,43 +108,37 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-
             return SingleChildScrollView(
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(
-                          alpha: 0.08,
-                        ),
+                        color: Colors.black.withValues(alpha: 0.08),
                         blurRadius: 30,
                         offset: const Offset(0, 12),
                       ),
                     ],
                   ),
                   child: Column(
-                      children: [
-                        const _LoginHeader(),
-                        _LoginForm(
-                            formKey: _formKey,
-                            emailController: _emailController,
-                            passwordController: _passwordController,
-                            obscurePassword: _obscurePassword,
-                            isLoading: _isLoading,
-                            onTogglePassword: () {
-                              setState(() {
-                                // Switch between seeing and hiding the password
-                                _obscurePassword =
-                                !_obscurePassword;
-                              });
-                            },
-                            onLogin: _login,
-                          ),
-
-                      ],
-                    ),
-
+                    children: [
+                      const _LoginHeader(),
+                      _LoginForm(
+                        formKey: _formKey,
+                        emailController: _emailController,
+                        passwordController: _passwordController,
+                        obscurePassword: _obscurePassword,
+                        isLoading: _isLoading,
+                        onTogglePassword: () {
+                          setState(() {
+                            // Switch between seeing and hiding the password
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                        onLogin: _login,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -173,10 +165,7 @@ class _LoginHeader extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF4D0BA8),
-                Color(0xFF7A28D9),
-              ],
+              colors: [Color(0xFF4D0BA8), Color(0xFF7A28D9)],
             ),
           ),
           child: Stack(
@@ -185,27 +174,20 @@ class _LoginHeader extends StatelessWidget {
               Positioned(
                 top: -70,
                 right: -45,
-                child: _CircleDecoration(
-                  size: 165,
-                ),
+                child: _CircleDecoration(size: 165),
               ),
 
               Positioned(
                 top: 125,
                 left: -55,
-                child: _CircleDecoration(
-                  size: 115,
-                ),
+                child: _CircleDecoration(size: 115),
               ),
 
               Positioned(
                 bottom: 75,
                 right: 60,
-                child: _CircleDecoration(
-                  size: 70,
-                ),
+                child: _CircleDecoration(size: 70),
               ),
-
             ],
           ),
         ),
@@ -237,12 +219,7 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        48,
-        0,
-        48,
-        55,
-      ),
+      padding: const EdgeInsets.fromLTRB(48, 0, 48, 55),
       child: Form(
         key: formKey,
         child: Column(
@@ -297,8 +274,7 @@ class _LoginForm extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) =>
-                    const ForgotPasswordScreen(),
+                    builder: (_) => const ForgotPasswordScreen(),
                   ),
                 );
               },
@@ -333,19 +309,13 @@ class _LoginForm extends StatelessWidget {
               children: [
                 Text(
                   "Don't have an account? ",
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: 17,
-                  ),
+                  style: TextStyle(color: Colors.grey.shade600, fontSize: 17),
                 ),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                        const SignupScreen(),
-                      ),
+                      MaterialPageRoute(builder: (_) => const SignupScreen()),
                     );
                   },
                   child: const Text(
@@ -368,9 +338,7 @@ class _LoginForm extends StatelessWidget {
 
 // Reusable widget for those decorative circles
 class _CircleDecoration extends StatelessWidget {
-  const _CircleDecoration({
-    required this.size,
-  });
+  const _CircleDecoration({required this.size});
 
   final double size;
 
@@ -423,9 +391,7 @@ class _WaveClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(
-      covariant CustomClipper<Path> oldClipper,
-      ) {
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return false;
   }
 }

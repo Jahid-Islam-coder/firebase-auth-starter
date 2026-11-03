@@ -8,9 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   Widget createLoginScreen() {
-    return const MaterialApp(
-      home: LoginScreen(),
-    );
+    return const MaterialApp(home: LoginScreen());
   }
 
   group('LoginScreen', () {
@@ -64,26 +62,30 @@ void main() {
       expect(updatedPasswordField.obscureText, false);
     });
 
-    testWidgets('shows validation errors when login button is pressed with empty fields',
-        (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(() {
-        tester.view.resetPhysicalSize();
-        tester.view.resetDevicePixelRatio();
-      });
+    testWidgets(
+      'shows validation errors when login button is pressed with empty fields',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
 
-      await tester.pumpWidget(createLoginScreen());
+        await tester.pumpWidget(createLoginScreen());
 
-      await tester.ensureVisible(find.byType(AuthButton));
-      await tester.tap(find.byType(AuthButton));
-      await tester.pump();
+        await tester.ensureVisible(find.byType(AuthButton));
+        await tester.tap(find.byType(AuthButton));
+        await tester.pump();
 
-      expect(find.text('Email is required'), findsOneWidget);
-      expect(find.text('Password is required'), findsOneWidget);
-    });
+        expect(find.text('Email is required'), findsOneWidget);
+        expect(find.text('Password is required'), findsOneWidget);
+      },
+    );
 
-    testWidgets('shows invalid email error when email format is incorrect', (tester) async {
+    testWidgets('shows invalid email error when email format is incorrect', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() {

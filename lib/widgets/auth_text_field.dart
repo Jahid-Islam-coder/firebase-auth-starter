@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AuthTextFieldStyle {
-  light,
-  purple,
-}
+enum AuthTextFieldStyle { light, purple }
 
 class AuthTextField extends StatelessWidget {
   const AuthTextField({
@@ -40,21 +37,15 @@ class AuthTextField extends StatelessWidget {
         color: isPurple ? Colors.white : Colors.black87,
         fontSize: 16,
       ),
-      cursorColor: isPurple
-          ? Colors.white
-          : const Color(0xFF5D1AB5),
+      cursorColor: isPurple ? Colors.white : const Color(0xFF5D1AB5),
       decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyle(
-          color: isPurple
-              ? Colors.white70
-              : Colors.grey.shade700,
+          color: isPurple ? Colors.white70 : Colors.grey.shade700,
         ),
         prefixIcon: Icon(
           icon,
-          color: isPurple
-              ? Colors.white
-              : Colors.grey.shade700,
+          color: isPurple ? Colors.white : Colors.grey.shade700,
         ),
         suffixIcon: suffixIcon,
         enabledBorder: OutlineInputBorder(
@@ -69,24 +60,17 @@ class AuthTextField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
-            color: isPurple
-                ? Colors.white
-                : const Color(0xFF5D1AB5),
+            color: isPurple ? Colors.white : const Color(0xFF5D1AB5),
             width: 2,
           ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: Colors.redAccent,
-          ),
+          borderSide: const BorderSide(color: Colors.redAccent),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: Colors.redAccent,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: Colors.redAccent, width: 2),
         ),
       ),
     );
